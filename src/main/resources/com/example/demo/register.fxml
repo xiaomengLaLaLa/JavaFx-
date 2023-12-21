@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane fx:controller="com.example.demo.RegisterController" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView styleClass="background-image" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../001.png"/>
+            </image>
+        </ImageView>
+        <GridPane styleClass="grid-pane" alignment="CENTER" hgap="10.0" vgap="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                  AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="100.0"
+                                   prefWidth="250.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="100.0"
+                                   prefWidth="250.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label text="用户名：" styleClass="label" GridPane.rowIndex="0"/>
+                <Label text="密码：" styleClass="label" GridPane.rowIndex="1"/>
+                <Label text="确认密码：" styleClass="label" GridPane.rowIndex="2"/>
+                <TextField fx:id="usernameField" promptText="请输入您的用户名" styleClass="text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="0"/>
+                <PasswordField fx:id="passwordField" promptText="请输入您的密码" styleClass="password-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="1"/>
+                <PasswordField fx:id="confirmPasswordField" promptText="请确认您的密码" styleClass="password-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="2"/>
+                <Button mnemonicParsing="false" onAction="#handleRegisterAction" text="注册" styleClass="button" GridPane.columnIndex="1"
+                        GridPane.rowIndex="3"/>
+                <Hyperlink text="返回登录页面" styleClass="hyperlink" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                           GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>
