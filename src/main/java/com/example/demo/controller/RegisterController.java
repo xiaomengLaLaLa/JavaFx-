@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

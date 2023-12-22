@@ -6,16 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
-public class RegisterApplication extends Application {
+public class EventApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(RegisterApplication.class.getResource("register.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(EventApplication.class.getResource("event.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Register Page");
+        primaryStage.setTitle("Event Page");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

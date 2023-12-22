@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.RegisterApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -68,7 +69,6 @@ public class LoginController {
             registerStage.setTitle("注册");
 
             Scene scene = new Scene(registerRoot);
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("base.css")).toExternalForm());
             registerStage.setScene(scene);
             registerStage.show();
 

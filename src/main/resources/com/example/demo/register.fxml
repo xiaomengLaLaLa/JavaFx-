@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 
-<AnchorPane fx:controller="com.example.demo.RegisterController" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="com.example.demo.controller.RegisterController" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles/base.css">
     <children>
         <ImageView styleClass="background-image" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
             <image>

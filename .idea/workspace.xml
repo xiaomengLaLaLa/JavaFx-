@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa50c118-6532-423a-97b8-5efa00c918bf" name="更改" comment="feat: 项目初始化，完成了登陆注册页面" />
+    <list default="true" id="aa50c118-6532-423a-97b8-5efa00c918bf" name="更改" comment="feat: 项目初始化，完成了登陆注册页面">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/EventApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/UserFormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/entity/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/event.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/RegisterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/RegisterApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/styles/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/register.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +34,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -26,7 +46,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="$PROJECT_DIR$/../../../Maven/apache-maven-3.6.3" />
-        <option name="useMavenConfig" value="false" />
+        <option name="useMavenConfig" value="true" />
         <option name="userSettingsFile" value="D:\Code\Maven\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -44,6 +64,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "last_directory_selection": "D:/Code/Study/JavaWeb/demo/src/main/java/com/example/demo",
@@ -57,25 +78,45 @@
     "project.structure.last.edited": "库",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Code\Study\JavaWeb\demo\src\main\resources" />
+      <recent name="D:\Code\课设\JavaFX\JavaFx-\src\main\resources\com\example\demo\styles" />
+      <recent name="D:\Code\课设\JavaFX\JavaFx-\src\main\resources\com\example\demo" />
+      <recent name="D:\Code\课设\JavaFX\JavaFx-\src\main\resources\com\example\demo\css" />
+      <recent name="D:\Code\课设\JavaFX\JavaFx-\src\main\resources\com\example\demo\controller" />
+      <recent name="D:\Code\课设\JavaFX\JavaFx-\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.demo" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.demo" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.MainApplication">
+  <component name="RunManager" selected="应用程序.EventApplication">
+    <configuration name="EventApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.demo.EventApplication" />
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo.HelloApplication" />
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.demo.*" />
+          <option name="PATTERN" value="com.example.demo.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,7 +129,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.demo.*" />
+          <option name="PATTERN" value="com.example.demo.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -101,7 +142,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.demo.*" />
+          <option name="PATTERN" value="com.example.demo.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -111,8 +152,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.MainApplication" />
+        <item itemvalue="应用程序.EventApplication" />
         <item itemvalue="应用程序.RegisterApplication" />
+        <item itemvalue="应用程序.MainApplication" />
         <item itemvalue="应用程序.HelloApplication" />
       </list>
     </recent_temporary>
@@ -136,6 +178,7 @@
       <workItem from="1703167579624" duration="636000" />
       <workItem from="1703168229774" duration="90000" />
       <workItem from="1703168405531" duration="83000" />
+      <workItem from="1703235141510" duration="8106000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 项目初始化，完成了登陆注册页面">
       <option name="closed" value="true" />

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 
-<AnchorPane fx:controller="com.example.demo.controller.LoginController" prefHeight="400.0" prefWidth="600.0"
+<AnchorPane fx:controller="com.example.demo.controller.UserFormController" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles/base.css">
     <children>
         <ImageView styleClass="background-image" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
@@ -28,18 +28,25 @@
                                 vgrow="SOMETIMES"/>
                 <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
                                 vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Label text="用户名：" styleClass="label" GridPane.rowIndex="0"/>
-                <Label text="密码：" styleClass="label" GridPane.rowIndex="1"/>
-                <TextField fx:id="usernameField" promptText="请输入您的用户名" styleClass="text-field" GridPane.columnIndex="1"
-                           GridPane.rowIndex="0"/>
-                <PasswordField fx:id="passwordField" promptText="请输入您的密码" styleClass="password-field" GridPane.columnIndex="1"
-                               GridPane.rowIndex="1"/>
-                <Button mnemonicParsing="false" onAction="#handleLoginAction" text="登录" styleClass="button" GridPane.columnIndex="1"
-                        GridPane.rowIndex="2"/>
-                <Hyperlink text="创建或注册新用户" onAction="#handleRegisterLinkAction" styleClass="hyperlink" GridPane.columnIndex="0" GridPane.columnSpan="2"
-                           GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
+                <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button" GridPane.columnIndex="1"
+                        GridPane.rowIndex="3"/>
+                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button" GridPane.columnIndex="1"
+                        GridPane.rowIndex="4"/>
+                <TableView fx:id="tableView" editable="true" onMouseClicked="#handleTableClick" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                           GridPane.rowIndex="5">
+                    <columns>
+                        <TableColumn fx:id="usernameColumn" text="用户名"/>
+                        <TableColumn fx:id="emailColumn" text="邮箱"/>
+                    </columns>
+                </TableView>
+                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="button" GridPane.columnIndex="1"
+                        GridPane.rowIndex="6"/>
             </children>
         </GridPane>
     </children>
