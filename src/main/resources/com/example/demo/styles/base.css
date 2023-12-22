@@ -53,3 +53,61 @@
 .hyperlink:hover {
     -fx-text-fill: #0056b3;
 }
+
+/* 表格整体样式 */
+.table-view {
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-base: #007bff;
+    -fx-control-inner-background: white;
+    -fx-table-cell-border-color: transparent;
+}
+
+/* 表格行样式 */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* 鼠标悬停在行上时的样式 */
+.table-row-cell:hover {
+    -fx-background-color: derive(#007BFF, 10%);
+}
+
+/* 选中行的样式 */
+.table-row-cell:selected {
+    -fx-background-color:derive(#007BFF, 20%);
+}
+
+/* 单元格样式 */
+.table-cell {
+    -fx-padding: 5px;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+}
+
+/* 列头样式 */
+.table-column-header .label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6c757d;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 5px 0 5px;
+}
+
+/* 分隔线样式 */
+.table-view .column-header-background .line {
+    -fx-stroke: derive(#6c757d, 20%);
+}
+
+/* 当表格内容为空时的提示信息 */
+.table-view:focused .table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+/* 当表格内容为空时的提示文本样式 */
+.table-view:focused .table-row-cell:empty .text {
+    -fx-fill: #6c757d;
+    -fx-font-size: 16px;
+    -fx-alignment: center;
+}

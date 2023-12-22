@@ -5,49 +5,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 
+<?import java.lang.String?>
 <AnchorPane fx:controller="com.example.demo.controller.UserFormController" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles/base.css">
     <children>
-        <ImageView styleClass="background-image" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../001.png"/>
-            </image>
-        </ImageView>
-        <GridPane styleClass="grid-pane" alignment="CENTER" hgap="10.0" vgap="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
-                  AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="100.0"
-                                   prefWidth="250.0"/>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="100.0"
-                                   prefWidth="250.0"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
-                                vgrow="SOMETIMES"/>
-            </rowConstraints>
+        <!-- 添加一个 HBox 用于放置按钮 -->
+        <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+              AnchorPane.rightAnchor="20.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button" GridPane.columnIndex="1"
-                        GridPane.rowIndex="3"/>
-                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button" GridPane.columnIndex="1"
-                        GridPane.rowIndex="4"/>
-                <TableView fx:id="tableView" editable="true" onMouseClicked="#handleTableClick" GridPane.columnIndex="0" GridPane.columnSpan="2"
-                           GridPane.rowIndex="5">
-                    <columns>
-                        <TableColumn fx:id="usernameColumn" text="用户名"/>
-                        <TableColumn fx:id="emailColumn" text="邮箱"/>
-                    </columns>
-                </TableView>
-                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="button" GridPane.columnIndex="1"
-                        GridPane.rowIndex="6"/>
+                <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button"/>
+                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>
+                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="button"/>
             </children>
-        </GridPane>
+        </HBox>
+
+        <!-- 调整 TableView 的样式和位置 -->
+        <TableView fx:id="tableView" editable="true" onMouseClicked="#handleTableClick" AnchorPane.topAnchor="150.0"
+                   AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <columns>
+                <TableColumn fx:id="usernameColumn" text="用户名" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="emailColumn" text="邮箱" minWidth="150.0" prefWidth="200.0"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <styleClass>
+                <String fx:value="table-view"/>
+            </styleClass>
+        </TableView>
     </children>
 </AnchorPane>

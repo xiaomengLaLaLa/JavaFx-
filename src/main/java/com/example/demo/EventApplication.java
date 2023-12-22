@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class EventApplication extends Application {
@@ -14,6 +15,16 @@ public class EventApplication extends Application {
         Scene scene = new Scene(root);
 
         primaryStage.setTitle("Event Page");
+
+        // 获取当前屏幕的宽度和高度
+        Screen screen = Screen.getPrimary();
+        double screenWidth = screen.getBounds().getWidth();
+        double screenHeight = screen.getBounds().getHeight();
+
+        // 调整舞台的宽度和高度为屏幕的80%
+        primaryStage.setWidth(screenWidth * 0.8);
+        primaryStage.setHeight(screenHeight * 0.8);
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
