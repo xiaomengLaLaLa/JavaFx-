@@ -176,7 +176,7 @@ public class EventController {
             noSelectionAlert.setHeaderText("请先选择一个数据再进行编辑操作");
             noSelectionAlert.showAndWait();
         }
-        // 编辑成功之后，重新触发查询
+        // 编辑之后，重新触发查询
         executeSelectAllQuery();
     }
 

@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.EventApplication;
-import com.example.demo.RegisterApplication;
 import com.example.demo.dao.UserDao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +14,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
+import java.util.Objects;
 
 /**
  * @author lm
@@ -65,7 +64,7 @@ public class LoginController {
             Stage eventStage = new Stage();
             eventStage.setTitle("欢迎进入【中国航工航天里程碑信息管理系统】");
 
-            FXMLLoader eventLoader = new FXMLLoader(EventApplication.class.getResource("event.fxml"));
+            FXMLLoader eventLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/example/demo/event.fxml")));
             Parent eventRoot = eventLoader.load();
             Scene eventScene = new Scene(eventRoot);
             // 获取当前屏幕的宽度和高度
@@ -89,7 +88,7 @@ public class LoginController {
      */
     public void handleRegisterLinkAction() {
         try {
-            FXMLLoader registerLoader = new FXMLLoader(RegisterApplication.class.getResource("register.fxml"));
+            FXMLLoader registerLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/example/demo/register.fxml")));
             Parent registerRoot = registerLoader.load();
 
             Stage registerStage = new Stage();

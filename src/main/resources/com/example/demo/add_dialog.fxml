@@ -48,7 +48,7 @@
                 <!-- 添加“添加”和“关闭”按钮 -->
                 <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="7">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleAddButtonClick" text="添加"/>
+                        <Button mnemonicParsing="false" onAction="#handleAddButtonClick" text="提交"/>
                         <Button mnemonicParsing="false" onAction="#handleCloseButtonClick" text="关闭"/>
                     </children>
                 </HBox>

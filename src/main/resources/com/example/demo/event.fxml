@@ -6,19 +6,16 @@
 <AnchorPane fx:controller="com.example.demo.controller.EventController" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles/base.css">
     <children>
-        <!-- 添加一个 HBox 用于放置按钮 -->
-        <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
-              AnchorPane.rightAnchor="20.0">
+        <!-- 添加一个 VBox 用于放置标题 -->
+        <VBox alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button"/>
-                <Button mnemonicParsing="false" onAction="#executeSelectAllQuery" text="查询" styleClass="button"/>
-                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>
-                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="dangerButton"/>
+                <!-- 添加标题 -->
+                <Label text="中国航空航天里程碑信息管理系统" wrapText="true" styleClass="title-label"/>
             </children>
-        </HBox>
+        </VBox>
 
         <!-- 调整 TableView 的样式和位置 -->
-        <TableView fx:id="tableView" editable="true" AnchorPane.topAnchor="150.0"
+        <TableView fx:id="tableView" editable="true" AnchorPane.topAnchor="70.0"
                    AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
             <columns>
                 <TableColumn fx:id="id" text="主键" minWidth="150.0" prefWidth="200.0"/>
@@ -36,5 +33,16 @@
                 <String fx:value="table-view"/>
             </styleClass>
         </TableView>
+
+        <!-- 添加一个 HBox 用于放置按钮，并将其放在 AnchorPane 的底部 -->
+        <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+              AnchorPane.rightAnchor="20.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button"/>
+                <Button mnemonicParsing="false" onAction="#executeSelectAllQuery" text="查询" styleClass="button"/>
+                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>
+                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="dangerButton"/>
+            </children>
+        </HBox>
     </children>
 </AnchorPane>

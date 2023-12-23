@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.RegisterApplication;
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.User;
 import com.example.demo.enums.SexEnums;
@@ -16,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 
 /**
@@ -92,7 +92,7 @@ public class RegisterController {
      */
     public void handleLoginLinkAction() {
         try {
-            FXMLLoader registerLoader = new FXMLLoader(RegisterApplication.class.getResource("login.fxml"));
+            FXMLLoader registerLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/example/demo/login.fxml")));
             Parent registerRoot = registerLoader.load();
 
             Stage registerStage = new Stage();

@@ -21,7 +21,7 @@ public class MainApplication extends Application {
             dbUtilInstance = new DBUtil();
             dbUtilInstance.getConn();
         }
-        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+        AnchorPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/demo/login.fxml")));
         Scene scene = new Scene(root);
 
         primaryStage.setTitle("用户登录");

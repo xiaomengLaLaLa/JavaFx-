@@ -127,3 +127,7 @@
     -fx-font-size: 16px;
     -fx-alignment: center;
 }
+
+.title-label {
+    -fx-font-size: 24px;
+}
