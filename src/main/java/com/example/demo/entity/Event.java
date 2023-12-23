@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -15,7 +16,7 @@ public class Event {
     /**
      * 事件的触发时间
      */
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
     /**
      * 飞船名
      */
@@ -35,19 +36,9 @@ public class Event {
     /**
      * 单位
      */
-    private int unit;
+    private String unit;
 
     public Event() {
-    }
-
-    public Event(int id, LocalDateTime dateTime, String shipName, String userName, int residenceTime, String desc, int unit) {
-        this.id = id;
-        this.dateTime = dateTime;
-        this.shipName = shipName;
-        this.userName = userName;
-        this.residenceTime = residenceTime;
-        this.desc = desc;
-        this.unit = unit;
     }
 
     @Override
@@ -59,63 +50,73 @@ public class Event {
                 ", userName='" + userName + '\'' +
                 ", residenceTime=" + residenceTime +
                 ", desc='" + desc + '\'' +
-                ", unit=" + unit +
+                ", unit='" + unit + '\'' +
                 '}';
+    }
+
+    public Event(int id, LocalDate dateTime, String shipName, String userName, int residenceTime, String desc, String unit) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.shipName = shipName;
+        this.userName = userName;
+        this.residenceTime = residenceTime;
+        this.desc = desc;
+        this.unit = unit;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public String getShipName() {
         return shipName;
     }
 
-    public void setShipName(String shipName) {
-        this.shipName = shipName;
-    }
-
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public int getResidenceTime() {
         return residenceTime;
     }
 
-    public void setResidenceTime(int residenceTime) {
-        this.residenceTime = residenceTime;
-    }
-
     public String getDesc() {
         return desc;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDateTime(LocalDate dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setShipName(String shipName) {
+        this.shipName = shipName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setResidenceTime(int residenceTime) {
+        this.residenceTime = residenceTime;
     }
 
     public void setDesc(String desc) {
         this.desc = desc;
     }
 
-    public int getUnit() {
-        return unit;
-    }
-
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 }

@@ -44,6 +44,21 @@
     -fx-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.dangerButton {
+    -fx-background-color: #e14860;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dangerButton:hover {
+    -fx-background-color: #f60606;
+    -fx-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .hyperlink {
     -fx-text-fill: #007BFF;
     -fx-font-size: 16px;
@@ -84,6 +99,7 @@
     -fx-padding: 5px;
     -fx-border-width: 0;
     -fx-border-color: transparent;
+    -fx-alignment: CENTER; /* 添加这一行来实现数据居中对齐 */
 }
 
 /* 列头样式 */
@@ -91,7 +107,7 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #6c757d;
-    -fx-alignment: CENTER_LEFT;
+    -fx-alignment: CENTER; /* 修改这一行来实现表头居中对齐 */
     -fx-padding: 0 5px 0 5px;
 }
 

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
-
 <?import java.lang.String?>
-<AnchorPane fx:controller="com.example.demo.controller.UserFormController" prefHeight="400.0" prefWidth="600.0"
+<AnchorPane fx:controller="com.example.demo.controller.EventController" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles/base.css">
     <children>
         <!-- 添加一个 HBox 用于放置按钮 -->
@@ -14,17 +11,23 @@
               AnchorPane.rightAnchor="20.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button"/>
-                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>
-                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="button"/>
+                <Button mnemonicParsing="false" onAction="#executeSelectAllQuery" text="查询" styleClass="button"/>
+<!--                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>-->
+                <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="dangerButton"/>
             </children>
         </HBox>
 
         <!-- 调整 TableView 的样式和位置 -->
-        <TableView fx:id="tableView" editable="true" onMouseClicked="#handleTableClick" AnchorPane.topAnchor="150.0"
+        <TableView fx:id="tableView" editable="true" AnchorPane.topAnchor="150.0"
                    AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
             <columns>
-                <TableColumn fx:id="usernameColumn" text="用户名" minWidth="150.0" prefWidth="200.0"/>
-                <TableColumn fx:id="emailColumn" text="邮箱" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="id" text="主键" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="dateTime" text="事件的触发时间" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="shipName" text="飞船名" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="userName" text="成员名" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="residenceTime" text="驻留时间" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="desc" text="详情描述" minWidth="150.0" prefWidth="200.0"/>
+                <TableColumn fx:id="unit" text="单位" minWidth="150.0" prefWidth="200.0"/>
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
