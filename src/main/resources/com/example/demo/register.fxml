@@ -41,9 +41,9 @@
                                GridPane.rowIndex="1"/>
                 <PasswordField fx:id="confirmPasswordField" promptText="请确认您的密码" styleClass="password-field" GridPane.columnIndex="1"
                                GridPane.rowIndex="2"/>
-                <Button mnemonicParsing="false" onAction="#handleRegisterAction" text="注册" styleClass="button" GridPane.columnIndex="1"
+                <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegisterAction" text="注册" styleClass="button" GridPane.columnIndex="1"
                         GridPane.rowIndex="3"/>
-                <Hyperlink text="返回登录页面" styleClass="hyperlink" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                <Hyperlink text="返回登录页面" onAction="#handleLoginLinkAction" styleClass="hyperlink" GridPane.columnIndex="0" GridPane.columnSpan="2"
                            GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
             </children>
         </GridPane>

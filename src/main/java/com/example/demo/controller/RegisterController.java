@@ -1,6 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.RegisterApplication;
 import com.example.demo.utils.DBUtil;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
@@ -8,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
@@ -75,5 +80,26 @@ public class RegisterController {
         successAlert.setContentText("注册成功！");
         successAlert.setHeaderText(null);
         successAlert.showAndWait();
+    }
+    /**
+     * 跳转到登录界面
+     * @param event
+     */
+    public void handleLoginLinkAction(ActionEvent event) {
+        try {
+            FXMLLoader registerLoader = new FXMLLoader(RegisterApplication.class.getResource("login.fxml"));
+            Parent registerRoot = registerLoader.load();
+
+            Stage registerStage = new Stage();
+            registerStage.setTitle("注册");
+
+            Scene scene = new Scene(registerRoot);
+            registerStage.setScene(scene);
+            registerStage.show();
+
+            ((Stage) registerButton.getScene().getWindow()).close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
