@@ -2,23 +2,21 @@ package com.example.demo.controller;
 
 import com.example.demo.RegisterApplication;
 import com.example.demo.utils.DBUtil;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class LoginController {
     @FXML
@@ -45,7 +43,7 @@ public class LoginController {
         // 登录验证逻辑
 
         // 获取数据库连接
-        Connection conn = dbUtil.getConn();
+        dbUtil.getConn();
         // 根据用户名密码查询用户
         ResultSet resultSet = dbUtil.executeQuery("SELECT * FROM user WHERE username = ? AND password = ? "
                 , new String[]{username, password});
@@ -66,6 +64,7 @@ public class LoginController {
             successAlert.setContentText("欢迎，" + username + "！");
             successAlert.showAndWait();
         }
+        dbUtil.closeAll();
     }
 
     /**
