@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.MainApplication;
 import com.example.demo.RegisterApplication;
-import com.example.demo.utils.DBUtil;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,6 +15,10 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
+
+/**
+ * @author lm
+ */
 public class RegisterController {
     @FXML
     private TextField usernameField;
@@ -29,16 +32,13 @@ public class RegisterController {
     @FXML
     private Button registerButton;
 
-    private DBUtil dbUtil = new DBUtil();
-
     // 报错语句
     Alert confirmationAlert = new Alert(AlertType.ERROR);
 
     /**
      * 点击注册按钮执行的函数
-     * @param event
      */
-    public void handleRegisterAction(ActionEvent event) throws SQLException {
+    public void handleRegisterAction() throws SQLException {
 
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -54,9 +54,8 @@ public class RegisterController {
         }
 
         // 注册逻辑
-        dbUtil.getConn();
         // 先校验数据库是否有相同的用户名
-        if (dbUtil.executeQuery("select * from user where username =?", new String[]{username}).next()) {
+        if (MainApplication.dbUtilInstance.executeQuery("select * from user where username =?", new String[]{username}).next()) {
             confirmationAlert.setTitle("用户名已存在");
             confirmationAlert.setHeaderText(null);
             confirmationAlert.setContentText("该用户名已存在，请重新输入！");
@@ -65,7 +64,7 @@ public class RegisterController {
         }
         // 执行插入语句
 
-        int result = dbUtil.executeUpdate("insert into user(username, password) values(?,?)", new String[]{username, password});
+        int result = MainApplication.dbUtilInstance.executeUpdate("insert into user(username, password) values(?,?)", new String[]{username, password});
         if (result == 0) {
             confirmationAlert.setTitle("注册失败");
             confirmationAlert.setHeaderText(null);
@@ -83,9 +82,8 @@ public class RegisterController {
     }
     /**
      * 跳转到登录界面
-     * @param event
      */
-    public void handleLoginLinkAction(ActionEvent event) {
+    public void handleLoginLinkAction() {
         try {
             FXMLLoader registerLoader = new FXMLLoader(RegisterApplication.class.getResource("login.fxml"));
             Parent registerRoot = registerLoader.load();

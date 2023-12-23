@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.MainApplication;
 import com.example.demo.dao.entity.Event;
-import com.example.demo.utils.DBUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ public class AddDialogController {
     private DialogPane addDialogPane;
 
     @FXML
-    private DatePicker datatime;
+    private DatePicker datetime;
 
     @FXML
     private TextField shipName;
@@ -34,9 +34,7 @@ public class AddDialogController {
     @FXML
     private ComboBox<String> unit;
 
-    private ObservableList<String> unitTypes = FXCollections.observableArrayList("小时", "天", "周", "月", "年");
-
-    private DBUtil dbUtil = new DBUtil();
+    private final ObservableList<String> unitTypes = FXCollections.observableArrayList("小时", "天", "周", "月", "年");
 
     // 错误提示
     Alert failureAlert = new Alert(Alert.AlertType.ERROR);
@@ -60,11 +58,10 @@ public class AddDialogController {
     private void handleAddButtonClick() {
         // 获取表单所有数据
         try {
-            dbUtil.getConn();
-            if (datatime.getValue() != null) {
+            if (datetime.getValue() != null) {
                 // 向数据库中插入数据
-                Event event = new Event(0, datatime.getValue(), shipName.getText(), username.getText(), residenceTime.getText() != null ? Integer.parseInt(residenceTime.getText()) : 0, desc.getText(), unit.getValue());
-                int updateFlag = dbUtil.executeUpdate(
+                Event event = new Event(0, datetime.getValue(), shipName.getText(), username.getText(), residenceTime.getText() != null ? Integer.parseInt(residenceTime.getText()) : 0, desc.getText(), unit.getValue());
+                int updateFlag = MainApplication.dbUtilInstance.executeUpdate(
                         "insert into event(datetime, shipName, userName, residenceTime, `desc`, unit) values(?,?,?,?,?,?)"
                         , new String[]{event.getDateTime().toString()
                                 , event.getShipName()
@@ -96,8 +93,6 @@ public class AddDialogController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbUtil.closeAll();
         }
         // 关闭对话框
         addDialogPane.getScene().getWindow().hide();

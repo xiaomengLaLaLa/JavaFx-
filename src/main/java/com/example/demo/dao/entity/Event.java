@@ -2,11 +2,10 @@ package com.example.demo.dao.entity;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author lm
- * @date 2023/12/22 19:21
+ * @since 2023/12/22 19:21
  */
 public class Event {
     /**

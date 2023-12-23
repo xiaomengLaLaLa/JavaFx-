@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.EventApplication;
+import com.example.demo.MainApplication;
 import com.example.demo.dao.entity.Event;
-import com.example.demo.utils.DBUtil;
 import com.example.demo.utils.PropertyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +21,7 @@ import java.util.Optional;
 
 /**
  * @author lm
- * @date 2023/12/22 19:22
+ * @since 2023/12/22 19:22
  */
 public class EventController {
     @FXML
@@ -30,8 +29,6 @@ public class EventController {
 
     @FXML
     private TableView<Event> tableView;
-
-//    private DBUtil dbUtil = new DBUtil();
 
     @FXML
     private TableColumn<Event, String> id;
@@ -66,8 +63,6 @@ public class EventController {
             executeSelectAllQuery();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-//            dbUtil.closeAll();
         }
     }
 
@@ -75,8 +70,7 @@ public class EventController {
     private void executeSelectAllQuery() {
         try {
             String query = "SELECT * FROM event";
-//            dbUtil.getConn();
-            ResultSet rs = EventApplication.dbUtilInstance.executeQuery(query, new String[]{});
+            ResultSet rs = MainApplication.dbUtilInstance.executeQuery(query, new String[]{});
             List<Event> events = new ArrayList<>();
             while (rs.next()) {
                 Event event = new Event();
@@ -95,8 +89,6 @@ public class EventController {
             System.out.println("触发了查询");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-//            EventApplication.closeAll();
         }
     }
 
@@ -108,7 +100,7 @@ public class EventController {
             DialogPane dialogPane = loader.load();
 
             // 获取对话框中的控制器
-            AddDialogController addDialogController = loader.getController();
+            loader.getController();
 
             // 创建一个新的对话框
             Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.OK);
@@ -116,23 +108,13 @@ public class EventController {
             alert.setTitle("添加用户");
             alert.setDialogPane(dialogPane);
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                // 新增用户逻辑
-//                String username = addDialogController.addUsernameField.getText();
-//                String password = addDialogController.addPasswordField.getText();
-//                String email = addDialogController.addEmailField.getText();
-
-//                Event newUser = new Event(username, password, email);
-//                users.add(newUser);
-//                tableView.getItems().add(newUser);
-            }
+            alert.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void handleDeleteAction(ActionEvent actionEvent) {
+    public void handleDeleteAction() {
         Event selectedEvent = tableView.getSelectionModel().getSelectedItem();
         if (selectedEvent != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -143,16 +125,15 @@ public class EventController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
                     String deleteQuery = "DELETE FROM event WHERE id = ?";
-//                    dbUtil.getConn();
-                    EventApplication.dbUtilInstance.executeUpdate(deleteQuery, new String[]{String.valueOf(selectedEvent.getId())});
+                    MainApplication.dbUtilInstance.executeUpdate(deleteQuery, new String[]{String.valueOf(selectedEvent.getId())});
                     tableView.getItems().remove(selectedEvent);
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.initOwner(tableView.getScene().getWindow());
                     alert1.setTitle("删除成功");
                     alert1.setHeaderText("选定的数据已成功删除");
                     alert1.showAndWait();
-                } finally {
-//                    dbUtil.closeAll();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
         } else {
@@ -173,16 +154,7 @@ public class EventController {
             DialogPane dialogPane = loader.load();
 
             // 获取对话框中的控制器
-            EditDialogController editDialogController = loader.getController();
-
-            // 设置对话框中的字段值为选定数据的属性
-            editDialogController.setId(selectedEvent.getId());
-            editDialogController.setDateTime(selectedEvent.getDateTime());
-            editDialogController.setShipName(selectedEvent.getShipName());
-            editDialogController.setUserName(selectedEvent.getUserName());
-            editDialogController.setResidenceTime(String.valueOf(selectedEvent.getResidenceTime()));
-            editDialogController.setDesc(selectedEvent.getDesc());
-            editDialogController.setUnit(selectedEvent.getUnit());
+            EditDialogController editDialogController = getEditDialogController(loader, selectedEvent);
 
             // 创建一个新的对话框
             Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.OK, ButtonType.CANCEL);
@@ -209,7 +181,7 @@ public class EventController {
 
                 String updateQuery = "UPDATE event SET dateTime = ?, shipName = ?, userName = ?, residenceTime = ?, desc = ?, unit = ? WHERE id = ?";
 //                dbUtil.getConn();
-                EventApplication.dbUtilInstance.executeUpdate(updateQuery, new String[]{String.valueOf(dateTime),
+                MainApplication.dbUtilInstance.executeUpdate(updateQuery, new String[]{String.valueOf(dateTime),
                         shipName,
                         userName,
                         String.valueOf(residenceTime),
@@ -231,5 +203,19 @@ public class EventController {
         }
         // 编辑成功之后，重新触发查询
         executeSelectAllQuery();
+    }
+
+    private static EditDialogController getEditDialogController(FXMLLoader loader, Event selectedEvent) {
+        EditDialogController editDialogController = loader.getController();
+
+        // 设置对话框中的字段值为选定数据的属性
+        editDialogController.setId(selectedEvent.getId());
+        editDialogController.setDateTime(selectedEvent.getDateTime());
+        editDialogController.setShipName(selectedEvent.getShipName());
+        editDialogController.setUserName(selectedEvent.getUserName());
+        editDialogController.setResidenceTime(String.valueOf(selectedEvent.getResidenceTime()));
+        editDialogController.setDesc(selectedEvent.getDesc());
+        editDialogController.setUnit(selectedEvent.getUnit());
+        return editDialogController;
     }
 }

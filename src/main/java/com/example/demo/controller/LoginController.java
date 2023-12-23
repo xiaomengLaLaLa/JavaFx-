@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.EventApplication;
+import com.example.demo.MainApplication;
 import com.example.demo.RegisterApplication;
-import com.example.demo.utils.DBUtil;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,12 +12,16 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author lm
+ */
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -26,16 +30,13 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-    // 数据库连接
-    private DBUtil dbUtil = new DBUtil();
     // 错误提示
     Alert failureAlert = new Alert(AlertType.ERROR);
 
     /**
      * 点击Login按钮执行的函数
-     * @param event
      */
-    public void handleLoginAction(ActionEvent event) throws SQLException {
+    public void handleLoginAction() throws SQLException, IOException {
 
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -43,9 +44,8 @@ public class LoginController {
         // 登录验证逻辑
 
         // 获取数据库连接
-        dbUtil.getConn();
         // 根据用户名密码查询用户
-        ResultSet resultSet = dbUtil.executeQuery("SELECT * FROM user WHERE username = ? AND password = ? "
+        ResultSet resultSet = MainApplication.dbUtilInstance.executeQuery("SELECT * FROM user WHERE username = ? AND password = ? "
                 , new String[]{username, password});
         // 没查询到数据
         if (!resultSet.next()) {
@@ -63,15 +63,34 @@ public class LoginController {
             successAlert.setHeaderText(null);
             successAlert.setContentText("欢迎，" + username + "！");
             successAlert.showAndWait();
+
+            // 登陆成功，跳转到事件界面
+            Stage eventStage = new Stage();
+            eventStage.setTitle("欢迎进入【中国航工航天里程碑信息管理系统】");
+
+            FXMLLoader eventLoader = new FXMLLoader(EventApplication.class.getResource("event.fxml"));
+            Parent eventRoot = eventLoader.load();
+            Scene eventScene = new Scene(eventRoot);
+            // 获取当前屏幕的宽度和高度
+            Screen screen = Screen.getPrimary();
+            double screenWidth = screen.getBounds().getWidth();
+            double screenHeight = screen.getBounds().getHeight();
+
+            // 调整舞台的宽度和高度为屏幕的80%
+            eventStage.setWidth(screenWidth * 0.8);
+            eventStage.setHeight(screenHeight * 0.8);
+
+            eventStage.setScene(eventScene);
+            eventStage.show();
+            // 关闭登录窗口
+            ((Stage) loginButton.getScene().getWindow()).close();
         }
-        dbUtil.closeAll();
     }
 
     /**
      * 跳转到注册界面
-     * @param event
      */
-    public void handleRegisterLinkAction(ActionEvent event) {
+    public void handleRegisterLinkAction() {
         try {
             FXMLLoader registerLoader = new FXMLLoader(RegisterApplication.class.getResource("register.fxml"));
             Parent registerRoot = registerLoader.load();

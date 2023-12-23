@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.entity.Event;
-import com.example.demo.utils.DBUtil;
+import com.example.demo.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -40,17 +38,13 @@ public class EditDialogController {
     @FXML
     private ComboBox<String> unit;
 
-    private ObservableList<String> unitTypes = FXCollections.observableArrayList("小时", "天", "周", "月", "年");
-
-    private DBUtil dbUtil = new DBUtil();
+    private final ObservableList<String> unitTypes = FXCollections.observableArrayList("小时", "天", "周", "月", "年");
 
     // 错误提示
     Alert failureAlert = new Alert(Alert.AlertType.ERROR);
 
     // 成功提示
     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-
-    private Event eventToEdit; // 用于存储待编辑的事件对象
 
     public void setDateTime(LocalDate dateTime) {
         this.datetime.setValue(dateTime);
@@ -91,10 +85,9 @@ public class EditDialogController {
     @FXML
     private void handleEditButtonClick() {
         try {
-            dbUtil.getConn();
             if (datetime.getValue() != null) {
                 // 更新数据库中的数据
-                int updateFlag = dbUtil.executeUpdate(
+                int updateFlag = MainApplication.dbUtilInstance.executeUpdate(
                         "update event set datetime = ?, shipName = ?, userName = ?, residenceTime = ?, `desc` = ?, unit = ? where id = ?"
                         , new String[]{
                                 datetime.getValue().toString(),
@@ -127,8 +120,6 @@ public class EditDialogController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            dbUtil.closeAll();
         }
         // 关闭对话框
         editDialogPane.getScene().getWindow().hide();
