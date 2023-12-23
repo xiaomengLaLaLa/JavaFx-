@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.MainApplication;
-import com.example.demo.dao.entity.Event;
+import com.example.demo.dao.EventDao;
+import com.example.demo.entity.Event;
 import com.example.demo.utils.PropertyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,10 +11,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -45,6 +43,8 @@ public class EventController {
     @FXML
     private TableColumn<Event, String> unit;
 
+    private final EventDao eventDao = new EventDao();
+
     public void initialize() {
         try {
 
@@ -67,26 +67,11 @@ public class EventController {
     }
 
     @FXML
-    private void executeSelectAllQuery() {
+    private void executeSelectAllQuery() throws Exception {
         try {
-            String query = "SELECT * FROM event";
-            ResultSet rs = MainApplication.dbUtilInstance.executeQuery(query, new String[]{});
-            List<Event> events = new ArrayList<>();
-            while (rs.next()) {
-                Event event = new Event();
-                event.setId(Integer.parseInt(rs.getString("id")));
-                event.setDateTime(LocalDate.parse(rs.getString("dateTime").substring(0, 10)));
-                event.setShipName(rs.getString("shipName"));
-                event.setUserName(rs.getString("userName"));
-                event.setResidenceTime(Integer.parseInt(rs.getString("residenceTime")));
-                event.setDesc(rs.getString("desc"));
-                event.setUnit(rs.getString("unit"));
-
-                events.add(event);
-            }
+            List<Event> events = eventDao.findAll();
             tableView.getItems().clear();
             tableView.getItems().addAll(events);
-            System.out.println("触发了查询");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -124,8 +109,7 @@ public class EventController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
-                    String deleteQuery = "DELETE FROM event WHERE id = ?";
-                    MainApplication.dbUtilInstance.executeUpdate(deleteQuery, new String[]{String.valueOf(selectedEvent.getId())});
+                    eventDao.delete(String.valueOf(selectedEvent.getId()));
                     tableView.getItems().remove(selectedEvent);
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.initOwner(tableView.getScene().getWindow());
@@ -146,7 +130,7 @@ public class EventController {
     }
 
     @FXML
-    public void handleEditAction(ActionEvent actionEvent) throws IOException {
+    public void handleEditAction(ActionEvent actionEvent) throws Exception {
         Event selectedEvent = tableView.getSelectionModel().getSelectedItem();
         if (selectedEvent != null) {
             dialogStage = (Stage) tableView.getScene().getWindow();
@@ -179,15 +163,6 @@ public class EventController {
                 selectedEvent.setDesc(desc);
                 selectedEvent.setUnit(unit);
 
-                String updateQuery = "UPDATE event SET dateTime = ?, shipName = ?, userName = ?, residenceTime = ?, desc = ?, unit = ? WHERE id = ?";
-//                dbUtil.getConn();
-                MainApplication.dbUtilInstance.executeUpdate(updateQuery, new String[]{String.valueOf(dateTime),
-                        shipName,
-                        userName,
-                        String.valueOf(residenceTime),
-                        desc,
-                        unit,
-                        String.valueOf(selectedEvent.getId())});
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.initOwner(tableView.getScene().getWindow());
                 alert1.setTitle("编辑成功");

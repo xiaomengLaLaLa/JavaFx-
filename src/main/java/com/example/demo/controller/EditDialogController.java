@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.MainApplication;
+import com.example.demo.dao.EventDao;
+import com.example.demo.entity.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -46,29 +47,7 @@ public class EditDialogController {
     // 成功提示
     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
 
-    public void setDateTime(LocalDate dateTime) {
-        this.datetime.setValue(dateTime);
-    }
-
-    public void setShipName(String shipName) {
-        this.shipName.setText(shipName);
-    }
-
-    public void setUserName(String username) {
-        this.username.setText(username);
-    }
-
-    public void setResidenceTime(String residenceTime) {
-        this.residenceTime.setText(residenceTime);
-    }
-
-    public void setDesc(String desc) {
-        this.desc.setText(desc);
-    }
-
-    public void setUnit(String unit) {
-        this.unit.setValue(unit);
-    }
+    private final EventDao eventDao = new EventDao();
 
     public void initialize() {
         // 添加驻留时间输入框的键入事件监听器
@@ -87,17 +66,8 @@ public class EditDialogController {
         try {
             if (datetime.getValue() != null) {
                 // 更新数据库中的数据
-                int updateFlag = MainApplication.dbUtilInstance.executeUpdate(
-                        "update event set datetime = ?, shipName = ?, userName = ?, residenceTime = ?, `desc` = ?, unit = ? where id = ?"
-                        , new String[]{
-                                datetime.getValue().toString(),
-                                shipName.getText(),
-                                username.getText(),
-                                residenceTime.getText(),
-                                desc.getText(),
-                                unit.getValue(),
-                                String.valueOf(id)
-                        });
+                Event event = new Event(id, datetime.getValue(), shipName.getText(), username.getText(), Integer.parseInt(residenceTime.getText()), desc.getText(), unit.getValue());
+                int updateFlag = eventDao.update(event);
                 if (updateFlag == 0) {
                     failureAlert = new Alert(Alert.AlertType.ERROR);
                     failureAlert.setTitle("编辑失败");
@@ -134,9 +104,11 @@ public class EditDialogController {
     public LocalDate getDateTime() {
         return datetime.getValue();
     }
+
     public String getShipName() {
         return shipName.getText();
     }
+
     public String getUserName() {
         return username.getText();
     }
@@ -144,11 +116,37 @@ public class EditDialogController {
     public String getResidenceTime() {
         return residenceTime.getText();
     }
+
     public String getDesc() {
         return desc.getText();
     }
+
     public String getUnit() {
         return unit.getValue();
+    }
+
+    public void setDateTime(LocalDate dateTime) {
+        this.datetime.setValue(dateTime);
+    }
+
+    public void setShipName(String shipName) {
+        this.shipName.setText(shipName);
+    }
+
+    public void setUserName(String username) {
+        this.username.setText(username);
+    }
+
+    public void setResidenceTime(String residenceTime) {
+        this.residenceTime.setText(residenceTime);
+    }
+
+    public void setDesc(String desc) {
+        this.desc.setText(desc);
+    }
+
+    public void setUnit(String unit) {
+        this.unit.setValue(unit);
     }
 
     public void setId(int id) {

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.EventApplication;
-import com.example.demo.MainApplication;
 import com.example.demo.RegisterApplication;
+import com.example.demo.dao.UserDao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author lm
@@ -30,23 +28,22 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
+    private final UserDao userDao = new UserDao();
+
     // 错误提示
     Alert failureAlert = new Alert(AlertType.ERROR);
 
     /**
      * 点击Login按钮执行的函数
      */
-    public void handleLoginAction() throws SQLException, IOException {
+    public void handleLoginAction() throws Exception {
 
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         // 登录验证逻辑
-
-        // 获取数据库连接
         // 根据用户名密码查询用户
-        ResultSet resultSet = MainApplication.dbUtilInstance.executeQuery("SELECT * FROM user WHERE username = ? AND password = ? "
-                , new String[]{username, password});
+        ResultSet resultSet = userDao.findUserInfo(username, password);
         // 没查询到数据
         if (!resultSet.next()) {
             System.out.println("登陆失败");
@@ -96,7 +93,7 @@ public class LoginController {
             Parent registerRoot = registerLoader.load();
 
             Stage registerStage = new Stage();
-            registerStage.setTitle("注册");
+            registerStage.setTitle("用户注册");
 
             Scene scene = new Scene(registerRoot);
             registerStage.setScene(scene);

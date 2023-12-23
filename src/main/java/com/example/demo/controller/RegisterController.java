@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.MainApplication;
 import com.example.demo.RegisterApplication;
+import com.example.demo.dao.UserDao;
+import com.example.demo.entity.User;
+import com.example.demo.enums.SexEnums;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,6 +34,8 @@ public class RegisterController {
     @FXML
     private Button registerButton;
 
+    private final UserDao userDao = new UserDao();
+
     // 报错语句
     Alert confirmationAlert = new Alert(AlertType.ERROR);
 
@@ -55,7 +59,7 @@ public class RegisterController {
 
         // 注册逻辑
         // 先校验数据库是否有相同的用户名
-        if (MainApplication.dbUtilInstance.executeQuery("select * from user where username =?", new String[]{username}).next()) {
+        if (userDao.findUserInfo(username, null).next()) {
             confirmationAlert.setTitle("用户名已存在");
             confirmationAlert.setHeaderText(null);
             confirmationAlert.setContentText("该用户名已存在，请重新输入！");
@@ -63,8 +67,11 @@ public class RegisterController {
             return;
         }
         // 执行插入语句
-
-        int result = MainApplication.dbUtilInstance.executeUpdate("insert into user(username, password) values(?,?)", new String[]{username, password});
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setAge(SexEnums.OTHER.getCode());
+        int result = userDao.add(user);
         if (result == 0) {
             confirmationAlert.setTitle("注册失败");
             confirmationAlert.setHeaderText(null);

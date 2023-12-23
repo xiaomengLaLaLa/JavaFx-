@@ -24,7 +24,7 @@ public class MainApplication extends Application {
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Login Page");
+        primaryStage.setTitle("用户登录");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

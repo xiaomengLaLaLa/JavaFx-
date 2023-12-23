@@ -1,4 +1,4 @@
-package com.example.demo.dao.entity;
+package com.example.demo.entity;
 
 
 import java.time.LocalDate;

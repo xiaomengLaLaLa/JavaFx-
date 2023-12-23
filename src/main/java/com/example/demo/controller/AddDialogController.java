@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.MainApplication;
-import com.example.demo.dao.entity.Event;
+import com.example.demo.dao.EventDao;
+import com.example.demo.entity.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,6 +34,8 @@ public class AddDialogController {
     @FXML
     private ComboBox<String> unit;
 
+    private final EventDao eventDao = new EventDao();
+
     private final ObservableList<String> unitTypes = FXCollections.observableArrayList("小时", "天", "周", "月", "年");
 
     // 错误提示
@@ -61,14 +63,7 @@ public class AddDialogController {
             if (datetime.getValue() != null) {
                 // 向数据库中插入数据
                 Event event = new Event(0, datetime.getValue(), shipName.getText(), username.getText(), residenceTime.getText() != null ? Integer.parseInt(residenceTime.getText()) : 0, desc.getText(), unit.getValue());
-                int updateFlag = MainApplication.dbUtilInstance.executeUpdate(
-                        "insert into event(datetime, shipName, userName, residenceTime, `desc`, unit) values(?,?,?,?,?,?)"
-                        , new String[]{event.getDateTime().toString()
-                                , event.getShipName()
-                                , event.getUserName(),
-                                String.valueOf(event.getResidenceTime()),
-                                event.getDesc(),
-                                event.getUnit()});
+                int updateFlag = eventDao.add(event);
                 if (updateFlag == 0) {
                     failureAlert = new Alert(Alert.AlertType.ERROR);
                     failureAlert.setTitle("添加失败");
