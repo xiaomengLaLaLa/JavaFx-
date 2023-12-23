@@ -12,7 +12,7 @@
             <children>
                 <Button mnemonicParsing="false" onAction="#handleAddAction" text="添加" styleClass="button"/>
                 <Button mnemonicParsing="false" onAction="#executeSelectAllQuery" text="查询" styleClass="button"/>
-<!--                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>-->
+                <Button mnemonicParsing="false" onAction="#handleEditAction" text="编辑" styleClass="button"/>
                 <Button mnemonicParsing="false" onAction="#handleDeleteAction" text="删除" styleClass="dangerButton"/>
             </children>
         </HBox>

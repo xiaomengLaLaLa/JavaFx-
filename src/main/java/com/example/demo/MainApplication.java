@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
+/**
+ * @author lm
+ */
 public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {

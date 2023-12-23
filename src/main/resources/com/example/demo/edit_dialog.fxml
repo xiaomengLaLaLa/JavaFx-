@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane
+        fx:id="editDialogPane"
+        fx:controller="com.example.demo.controller.EditDialogController"
+        xmlns="http://javafx.com/javafx/16"
+        xmlns:fx="http://javafx.com/fxml/1"
+>
+    <content>
+        <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="100.0"
+                                   prefWidth="250.0"/>
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="30.0" prefHeight="40.0" valignment="CENTER"
+                                vgrow="SOMETIMES"/>
+            </rowConstraints>
+
+            <children>
+                <Label text="开始时间：" GridPane.rowIndex="0"/>
+                <DatePicker fx:id="datetime" promptText="请选择开始时间" GridPane.columnIndex="1"
+                            GridPane.rowIndex="0"/>
+
+                <Label text="飞船名：" GridPane.rowIndex="1"/>
+                <TextField fx:id="shipName" promptText="请输入飞船名" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="成员名：" GridPane.rowIndex="2"/>
+                <TextField fx:id="username" promptText="请输入成员名" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="驻留时间：" GridPane.rowIndex="3"/>
+                <TextField fx:id="residenceTime" promptText="请输入驻留时间" GridPane.columnIndex="1"
+                           GridPane.rowIndex="3"/>
+
+                <Label text="详细描述：" GridPane.rowIndex="4"/>
+                <TextField fx:id="desc" promptText="请输入详细描述" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                <Label text="单位：" GridPane.rowIndex="5"/>
+                <ComboBox fx:id="unit" promptText="请输入单位" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                <!-- 添加“添加”和“关闭”按钮 -->
+                <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#handleEditButtonClick" text="确认"/>
+                        <Button mnemonicParsing="false" onAction="#handleCloseButtonClick" text="关闭"/>
+                    </children>
+                </HBox>
+            </children>
+        </GridPane>
+    </content>
+</DialogPane>

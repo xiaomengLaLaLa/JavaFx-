@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Event;
+import com.example.demo.dao.entity.Event;
 import com.example.demo.utils.DBUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -81,7 +81,7 @@ public class AddDialogController {
                 } else {
                     successAlert.setTitle("添加成功");
                     successAlert.setHeaderText(null);
-                    successAlert.setContentText("添加失败");
+                    successAlert.setContentText("添加成功");
                     successAlert.showAndWait();
                 }
                 System.out.println(event);

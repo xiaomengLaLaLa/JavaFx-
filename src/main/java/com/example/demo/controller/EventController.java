@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Event;
+import com.example.demo.EventApplication;
+import com.example.demo.dao.entity.Event;
 import com.example.demo.utils.DBUtil;
 import com.example.demo.utils.PropertyUtils;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ public class EventController {
     @FXML
     private TableView<Event> tableView;
 
-    private DBUtil dbUtil = new DBUtil();
+//    private DBUtil dbUtil = new DBUtil();
 
     @FXML
     private TableColumn<Event, String> id;
@@ -66,7 +67,7 @@ public class EventController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbUtil.closeAll();
+//            dbUtil.closeAll();
         }
     }
 
@@ -74,8 +75,8 @@ public class EventController {
     private void executeSelectAllQuery() {
         try {
             String query = "SELECT * FROM event";
-            dbUtil.getConn();
-            ResultSet rs = dbUtil.executeQuery(query, new String[]{});
+//            dbUtil.getConn();
+            ResultSet rs = EventApplication.dbUtilInstance.executeQuery(query, new String[]{});
             List<Event> events = new ArrayList<>();
             while (rs.next()) {
                 Event event = new Event();
@@ -91,10 +92,11 @@ public class EventController {
             }
             tableView.getItems().clear();
             tableView.getItems().addAll(events);
+            System.out.println("触发了查询");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            dbUtil.closeAll();
+//            EventApplication.closeAll();
         }
     }
 
@@ -141,8 +143,8 @@ public class EventController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
                     String deleteQuery = "DELETE FROM event WHERE id = ?";
-                    dbUtil.getConn();
-                    dbUtil.executeUpdate(deleteQuery, new String[]{String.valueOf(selectedEvent.getId())});
+//                    dbUtil.getConn();
+                    EventApplication.dbUtilInstance.executeUpdate(deleteQuery, new String[]{String.valueOf(selectedEvent.getId())});
                     tableView.getItems().remove(selectedEvent);
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                     alert1.initOwner(tableView.getScene().getWindow());
@@ -150,15 +152,84 @@ public class EventController {
                     alert1.setHeaderText("选定的数据已成功删除");
                     alert1.showAndWait();
                 } finally {
-                    dbUtil.closeAll();
+//                    dbUtil.closeAll();
                 }
             }
         } else {
             Alert noSelectionAlert = new Alert(Alert.AlertType.WARNING);
             noSelectionAlert.initOwner(tableView.getScene().getWindow());
-            noSelectionAlert.setTitle("未选择事件");
-            noSelectionAlert.setHeaderText("请先选择一个事件再进行删除操作");
+            noSelectionAlert.setTitle("未选择数据");
+            noSelectionAlert.setHeaderText("请先选择一个数据再进行删除操作");
             noSelectionAlert.showAndWait();
         }
+    }
+
+    @FXML
+    public void handleEditAction(ActionEvent actionEvent) throws IOException {
+        Event selectedEvent = tableView.getSelectionModel().getSelectedItem();
+        if (selectedEvent != null) {
+            dialogStage = (Stage) tableView.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/example/demo/edit_dialog.fxml")));
+            DialogPane dialogPane = loader.load();
+
+            // 获取对话框中的控制器
+            EditDialogController editDialogController = loader.getController();
+
+            // 设置对话框中的字段值为选定数据的属性
+            editDialogController.setId(selectedEvent.getId());
+            editDialogController.setDateTime(selectedEvent.getDateTime());
+            editDialogController.setShipName(selectedEvent.getShipName());
+            editDialogController.setUserName(selectedEvent.getUserName());
+            editDialogController.setResidenceTime(String.valueOf(selectedEvent.getResidenceTime()));
+            editDialogController.setDesc(selectedEvent.getDesc());
+            editDialogController.setUnit(selectedEvent.getUnit());
+
+            // 创建一个新的对话框
+            Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.OK, ButtonType.CANCEL);
+            alert.initOwner(dialogStage);
+            alert.setTitle("编辑数据");
+            alert.setDialogPane(dialogPane);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // 更新用户逻辑
+                LocalDate dateTime = editDialogController.getDateTime();
+                String shipName = editDialogController.getShipName();
+                String userName = editDialogController.getUserName();
+                int residenceTime = Integer.parseInt(editDialogController.getResidenceTime());
+                String desc = editDialogController.getDesc();
+                String unit = editDialogController.getUnit();
+
+                selectedEvent.setDateTime(dateTime);
+                selectedEvent.setShipName(shipName);
+                selectedEvent.setUserName(userName);
+                selectedEvent.setResidenceTime(residenceTime);
+                selectedEvent.setDesc(desc);
+                selectedEvent.setUnit(unit);
+
+                String updateQuery = "UPDATE event SET dateTime = ?, shipName = ?, userName = ?, residenceTime = ?, desc = ?, unit = ? WHERE id = ?";
+//                dbUtil.getConn();
+                EventApplication.dbUtilInstance.executeUpdate(updateQuery, new String[]{String.valueOf(dateTime),
+                        shipName,
+                        userName,
+                        String.valueOf(residenceTime),
+                        desc,
+                        unit,
+                        String.valueOf(selectedEvent.getId())});
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.initOwner(tableView.getScene().getWindow());
+                alert1.setTitle("编辑成功");
+                alert1.setHeaderText("选定的数据已成功更新");
+                alert1.showAndWait();
+            }
+        } else {
+            Alert noSelectionAlert = new Alert(Alert.AlertType.WARNING);
+            noSelectionAlert.initOwner(tableView.getScene().getWindow());
+            noSelectionAlert.setTitle("未选择数据");
+            noSelectionAlert.setHeaderText("请先选择一个数据再进行编辑操作");
+            noSelectionAlert.showAndWait();
+        }
+        // 编辑成功之后，重新触发查询
+        executeSelectAllQuery();
     }
 }
