@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.EventDao;
+import com.example.demo.dao.impl.EventDaoImpl;
 import com.example.demo.entity.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
 /**
- * @author zrx
+ * @author lm
  * @since 2023/12/23 16:00
  */
 public class AddDialogController {
@@ -34,7 +35,7 @@ public class AddDialogController {
     @FXML
     private ComboBox<String> unit;
 
-    private final EventDao eventDao = new EventDao();
+    private final EventDao eventDao = new EventDaoImpl();
 
     private final ObservableList<String> unitTypes = FXCollections.observableArrayList("小时", "天", "周", "月", "年");
 

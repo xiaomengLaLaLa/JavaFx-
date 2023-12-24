@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.dao.impl.UserDaoImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +28,7 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDaoImpl();
 
     // 错误提示
     Alert failureAlert = new Alert(AlertType.ERROR);

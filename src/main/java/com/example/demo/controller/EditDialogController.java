@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.EventDao;
+import com.example.demo.dao.impl.EventDaoImpl;
 import com.example.demo.entity.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import java.time.LocalDate;
 
 /**
- * @author zrx
+ * @author lm
  * @since 2023/12/23 16:00
  */
 public class EditDialogController {
@@ -47,7 +48,7 @@ public class EditDialogController {
     // 成功提示
     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
 
-    private final EventDao eventDao = new EventDao();
+    private final EventDao eventDao = new EventDaoImpl();
 
     public void initialize() {
         // 添加驻留时间输入框的键入事件监听器

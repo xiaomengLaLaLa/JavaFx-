@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dao.EventDao;
+import com.example.demo.dao.impl.EventDaoImpl;
 import com.example.demo.entity.Event;
 import com.example.demo.utils.PropertyUtils;
 import javafx.event.ActionEvent;
@@ -43,7 +44,7 @@ public class EventController {
     @FXML
     private TableColumn<Event, String> unit;
 
-    private final EventDao eventDao = new EventDao();
+    private final EventDao eventDao = new EventDaoImpl();
 
     public void initialize() {
         try {

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.dao.impl.UserDaoImpl;
 import com.example.demo.entity.User;
 import com.example.demo.enums.SexEnums;
 import javafx.fxml.FXML;
@@ -34,7 +35,7 @@ public class RegisterController {
     @FXML
     private Button registerButton;
 
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDaoImpl();
 
     // 报错语句
     Alert confirmationAlert = new Alert(AlertType.ERROR);

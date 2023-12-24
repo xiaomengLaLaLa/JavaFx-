@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 /**
- * @author zrx
+ * @author lm
  * @since 2023/12/22 23:09
  */
 public class User {
